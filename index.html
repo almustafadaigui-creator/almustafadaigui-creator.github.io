@@ -19,7 +19,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-G-P0W0DF8EJK');
+  gtag('config', 'G-YOUR_ID_HERE');
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,20 +74,106 @@ body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-wei
 .sb-foot a:hover { color:var(--accent); }
 
 /* ── MAIN ── */
-#main { margin-left:var(--sb-w); flex:1; }
-.page { display:none; padding:52px 68px 88px; max-width:820px; animation:fadeUp .28s ease; }
+#main {
+  margin-left:var(--sb-w);
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+.page {
+  display:none;
+  padding:56px 64px 100px;
+  width:100%;
+  max-width:760px;
+  animation:fadeUp .28s ease;
+}
 .page.active { display:block; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
+/* ── MOBILE TOP BAR (hidden on desktop) ── */
+#topbar {
+  display:none;
+  position:fixed; top:0; left:0; right:0;
+  height:52px;
+  background:var(--sb-bg);
+  border-bottom:1px solid var(--border);
+  z-index:300;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+}
+#topbar .tb-name { font-family:var(--serif); font-size:17px; font-weight:700; letter-spacing:.12em; }
+#hamburger {
+  width:36px; height:36px;
+  display:flex; flex-direction:column;
+  justify-content:center; gap:5px;
+  cursor:pointer; padding:4px;
+}
+#hamburger span { display:block; height:2px; background:var(--ink); border-radius:2px; transition:all .25s; }
+#hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+#hamburger.open span:nth-child(2) { opacity:0; }
+#hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* overlay when mobile menu open */
+#overlay {
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.35);
+  z-index:150;
+}
+#overlay.show { display:block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:768px) {
+  body { flex-direction:column; }
+
+  #topbar { display:flex; }
+
+  #sidebar {
+    position:fixed;
+    top:52px; left:0;
+    width:260px;
+    height:calc(100vh - 52px);
+    transform:translateX(-100%);
+    transition:transform .28s ease;
+    z-index:200;
+    padding-top:20px;
+  }
+  #sidebar.open { transform:translateX(0); }
+
+  #main {
+    margin-left:0;
+    margin-top:52px;
+    width:100%;
+  }
+
+  .page {
+    padding:32px 20px 72px;
+    max-width:100%;
+  }
+
+  h1 { font-size:28px; }
+  h2 { font-size:18px; margin-top:36px; }
+  .lead { font-size:15px; }
+  p { font-size:14.5px; }
+  .quote { font-size:15px; padding:16px 18px; }
+  .callout { font-size:14px; padding:16px 18px; }
+  .cards { grid-template-columns:1fr; }
+  .prof { flex-direction:column; gap:16px; }
+  .tabs { overflow-x:auto; }
+  .tab { white-space:nowrap; font-size:13px; padding:9px 14px; }
+}
+
 /* ── TYPE ── */
-.eyebrow { font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+.eyebrow { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:8px; }
 .eyebrow::after { content:''; flex:1; height:1px; background:var(--border); }
-h1 { font-family:var(--serif); font-size:34px; font-weight:700; line-height:1.25; letter-spacing:.03em; margin-bottom:6px; }
-h2 { font-family:var(--serif); font-size:18px; font-weight:600; margin:44px 0 14px; display:flex; align-items:center; gap:10px; }
-h2::before { content:''; width:3px; height:18px; background:var(--accent); border-radius:2px; flex-shrink:0; }
-h3 { font-family:var(--serif); font-size:15px; font-weight:600; margin:18px 0 7px; }
-.lead { font-family:var(--serif); font-size:15.5px; line-height:1.95; color:var(--ink-2); margin-bottom:28px; font-weight:300; }
-p { font-size:14px; line-height:1.95; color:var(--ink-2); margin-bottom:14px; }
+h1 { font-family:var(--serif); font-size:42px; font-weight:700; line-height:1.2; letter-spacing:.03em; margin-bottom:10px; }
+h2 { font-family:var(--serif); font-size:22px; font-weight:600; margin:48px 0 16px; display:flex; align-items:center; gap:10px; }
+h2::before { content:''; width:4px; height:22px; background:var(--accent); border-radius:2px; flex-shrink:0; }
+h3 { font-family:var(--serif); font-size:17px; font-weight:600; margin:18px 0 8px; }
+.lead { font-family:var(--serif); font-size:18px; line-height:1.9; color:var(--ink-2); margin-bottom:32px; font-weight:300; }
+p { font-size:15.5px; line-height:1.95; color:var(--ink-2); margin-bottom:16px; }
 
 /* ── PROFILE ── */
 .prof { display:flex; gap:28px; align-items:flex-start; margin-bottom:36px; padding-bottom:36px; border-bottom:1px solid var(--border); }
@@ -107,9 +193,9 @@ p { font-size:14px; line-height:1.95; color:var(--ink-2); margin-bottom:14px; }
 .iv { color:var(--ink-2); line-height:1.75; }
 
 /* ── QUOTE / CALLOUT ── */
-.quote { border-left:3px solid var(--accent); padding:16px 22px; background:var(--accent-bg); border-radius:0 6px 6px 0; margin:28px 0; font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--ink); }
-.quote .src { font-size:11.5px; color:var(--ink-3); margin-top:8px; font-family:var(--sans); }
-.callout { background:var(--gold-bg); border:1px solid #DDD0B5; border-radius:6px; padding:18px 22px; margin:22px 0; font-size:13.5px; line-height:1.8; color:var(--ink-2); }
+.quote { border-left:4px solid var(--accent); padding:20px 26px; background:var(--accent-bg); border-radius:0 8px 8px 0; margin:32px 0; font-family:var(--serif); font-size:18px; line-height:1.85; color:var(--ink); }
+.quote .src { font-size:12.5px; color:var(--ink-3); margin-top:10px; font-family:var(--sans); }
+.callout { background:var(--gold-bg); border:1px solid #DDD0B5; border-radius:8px; padding:20px 26px; margin:24px 0; font-size:15px; line-height:1.85; color:var(--ink-2); }
 .callout strong { color:var(--gold); font-weight:500; }
 
 /* ── CARDS ── */
@@ -138,11 +224,11 @@ p { font-size:14px; line-height:1.95; color:var(--ink-2); margin-bottom:14px; }
 .tc.active { display:block; animation:fadeUp .22s ease; }
 
 /* ── CONCEPT BLOCKS ── */
-.concept { background:var(--bg2); border:1px solid var(--border); border-radius:7px; padding:20px 24px; margin-bottom:12px; position:relative; overflow:hidden; }
+.concept { background:var(--bg2); border:1px solid var(--border); border-radius:7px; padding:24px 28px; margin-bottom:14px; position:relative; overflow:hidden; }
 .concept::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent); }
-.concept h3 { margin:0 0 8px; font-size:15px; }
-.concept p { font-size:13.5px; margin:0; line-height:1.85; }
-.concept p + p { margin-top:9px; }
+.concept h3 { margin:0 0 10px; font-size:17px; }
+.concept p { font-size:15px; margin:0; line-height:1.85; }
+.concept p + p { margin-top:10px; }
 
 /* ── STEPS ── */
 .steps { margin:16px 0; }
@@ -160,6 +246,15 @@ p { font-size:14px; line-height:1.95; color:var(--ink-2); margin-bottom:14px; }
 </style>
 </head>
 <body>
+
+<!-- ══ MOBILE TOP BAR ══ -->
+<div id="topbar">
+  <div class="tb-name">法　愿</div>
+  <div id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+<div id="overlay" onclick="closeMenu()"></div>
 
 <!-- ══ SIDEBAR ══ -->
 <nav id="sidebar">
@@ -368,12 +463,29 @@ p { font-size:14px; line-height:1.95; color:var(--ink-2); margin-bottom:14px; }
 <script>
 const tabMap = { lilun:0, shixiu:1, qushi:2, sikao:3 };
 
+function toggleMenu() {
+  const sb = document.getElementById('sidebar');
+  const hb = document.getElementById('hamburger');
+  const ov = document.getElementById('overlay');
+  sb.classList.toggle('open');
+  hb.classList.toggle('open');
+  ov.classList.toggle('show');
+}
+
+function closeMenu() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
 function gPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   document.querySelectorAll('.sb-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('sub-xx').style.display = (id === 'xx') ? 'block' : 'none';
+  closeMenu();
+  window.scrollTo(0,0);
 }
 
 function gTab(page, tab, el) {
@@ -387,6 +499,7 @@ function gTab(page, tab, el) {
   const subs = document.querySelectorAll('#sub-xx .sb-sub');
   subs.forEach(s => s.classList.remove('active'));
   if (subs[tabMap[tab]]) subs[tabMap[tab]].classList.add('active');
+  closeMenu();
 }
 </script>
 </body>
