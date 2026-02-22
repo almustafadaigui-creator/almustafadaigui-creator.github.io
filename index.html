@@ -3,662 +3,391 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个人主页</title>
+<title>法愿 · 心性文明推动者</title>
+<meta name="description" content="法愿个人主页——心性文明的推动者与提倡者，武陵禅寺体系学人，修道班项目发起人。">
+
+<!-- ══ Google Analytics ══
+     使用步骤：
+     1. 访问 https://analytics.google.com 注册免费账号
+     2. 创建"媒体资源"，类型选 Web，填入你的网址
+     3. 拿到格式为 G-XXXXXXXXXX 的"测量 ID"
+     4. 将下面两处 G-YOUR_ID_HERE 替换为你的真实 ID
+     5. 重新上传此文件到 GitHub，即可追踪访客数据
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_ID_HERE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G-P0W0DF8EJK');
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg: #F5F3EE;
-    --sidebar-bg: #FAFAF7;
-    --border: #E0DDD6;
-    --text-primary: #1C1C1A;
-    --text-secondary: #6B6860;
-    --text-muted: #A09D97;
-    --accent: #3D5A80;
-    --accent-light: #E8EFF7;
-    --accent-warm: #8B6914;
-    --sidebar-width: 240px;
-    --serif: 'Noto Serif SC', 'EB Garamond', serif;
-    --sans: 'Noto Sans SC', sans-serif;
-  }
+:root {
+  --bg:         #F7F5F0;
+  --bg2:        #FFFFFF;
+  --sb-bg:      #F0EDE6;
+  --border:     #DDD9D0;
+  --border-dk:  #B8B3A8;
+  --ink:        #1A1917;
+  --ink-2:      #4A4740;
+  --ink-3:      #8A8780;
+  --accent:     #7C4A2D;
+  --accent-bg:  #F5EDE6;
+  --gold:       #9A7B3A;
+  --gold-bg:    #F8F3E6;
+  --sb-w:       232px;
+  --serif:      'Noto Serif SC', serif;
+  --sans:       'Noto Sans SC', sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-weight:300; min-height:100vh; display:flex; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── SIDEBAR ── */
+#sidebar {
+  width:var(--sb-w); min-height:100vh; background:var(--sb-bg);
+  border-right:1px solid var(--border); position:fixed; top:0; left:0;
+  display:flex; flex-direction:column; padding:32px 0 24px; z-index:200;
+}
+.sb-brand { padding:0 24px 26px; border-bottom:1px solid var(--border); margin-bottom:14px; }
+.sb-brand .zh { font-family:var(--serif); font-size:22px; font-weight:700; letter-spacing:.15em; line-height:1; }
+.sb-brand .en { font-family:'Playfair Display',serif; font-style:italic; font-size:12px; color:var(--ink-3); margin-top:5px; letter-spacing:.08em; }
+.sb-brand .tl { margin-top:10px; font-size:11px; color:var(--accent); letter-spacing:.1em; line-height:1.75; border-left:2px solid var(--accent); padding-left:8px; }
+.sb-sec { padding:0 12px; margin-bottom:4px; }
+.sb-lbl { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); padding:10px 12px 5px; }
+.sb-item {
+  display:flex; align-items:center; gap:8px; padding:7px 12px; border-radius:5px;
+  cursor:pointer; font-size:13.5px; color:var(--ink-2); transition:background .15s,color .15s; user-select:none;
+}
+.sb-item:hover { background:var(--accent-bg); color:var(--accent); }
+.sb-item.active { background:var(--accent-bg); color:var(--accent); font-weight:500; }
+.sb-item svg { width:14px; height:14px; opacity:.5; flex-shrink:0; }
+.sb-sub { padding:5px 12px 5px 34px; font-size:12.5px; border-radius:4px; cursor:pointer; color:var(--ink-3); transition:background .15s,color .15s; user-select:none; }
+.sb-sub:hover { color:var(--accent); background:var(--accent-bg); }
+.sb-sub.active { color:var(--accent); font-weight:500; }
+#sub-xx { display:none; }
+.sb-foot { margin-top:auto; padding:16px 24px 0; border-top:1px solid var(--border); font-size:11px; color:var(--ink-3); line-height:1.9; }
+.sb-foot a { color:var(--ink-3); text-decoration:none; }
+.sb-foot a:hover { color:var(--accent); }
 
-  body {
-    background: var(--bg);
-    color: var(--text-primary);
-    font-family: var(--sans);
-    font-weight: 300;
-    min-height: 100vh;
-    display: flex;
-  }
+/* ── MAIN ── */
+#main { margin-left:var(--sb-w); flex:1; }
+.page { display:none; padding:52px 68px 88px; max-width:820px; animation:fadeUp .28s ease; }
+.page.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-  /* ── SIDEBAR ── */
-  #sidebar {
-    width: var(--sidebar-width);
-    min-height: 100vh;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    position: fixed;
-    top: 0; left: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 36px 0 24px;
-    z-index: 100;
-  }
+/* ── TYPE ── */
+.eyebrow { font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+.eyebrow::after { content:''; flex:1; height:1px; background:var(--border); }
+h1 { font-family:var(--serif); font-size:34px; font-weight:700; line-height:1.25; letter-spacing:.03em; margin-bottom:6px; }
+h2 { font-family:var(--serif); font-size:18px; font-weight:600; margin:44px 0 14px; display:flex; align-items:center; gap:10px; }
+h2::before { content:''; width:3px; height:18px; background:var(--accent); border-radius:2px; flex-shrink:0; }
+h3 { font-family:var(--serif); font-size:15px; font-weight:600; margin:18px 0 7px; }
+.lead { font-family:var(--serif); font-size:15.5px; line-height:1.95; color:var(--ink-2); margin-bottom:28px; font-weight:300; }
+p { font-size:14px; line-height:1.95; color:var(--ink-2); margin-bottom:14px; }
 
-  .sidebar-logo {
-    padding: 0 28px 32px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
-  }
+/* ── PROFILE ── */
+.prof { display:flex; gap:28px; align-items:flex-start; margin-bottom:36px; padding-bottom:36px; border-bottom:1px solid var(--border); }
+.avatar { width:78px; height:78px; border-radius:50%; background:var(--accent-bg); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; }
+.prof-info .name { font-family:var(--serif); font-size:27px; font-weight:700; letter-spacing:.08em; }
+.prof-info .role { font-size:12.5px; color:var(--ink-3); margin:5px 0 12px; letter-spacing:.04em; }
+.tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+.tag { font-size:11.5px; padding:3px 11px; border-radius:20px; font-weight:400; }
+.tag.r { background:var(--accent-bg); color:var(--accent); border:1px solid #DFC4B5; }
+.tag.g { background:var(--gold-bg); color:var(--gold); border:1px solid #DDD0B5; }
+.tag.k { background:#EDEAE4; color:var(--ink-2); border:1px solid var(--border); }
 
-  .sidebar-logo .name {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text-primary);
-    letter-spacing: 0.05em;
-    line-height: 1.4;
-  }
+/* ── INFO ROW ── */
+.info-row { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); font-size:13.5px; align-items:baseline; }
+.info-row:last-child { border-bottom:none; }
+.il { color:var(--ink-3); width:76px; flex-shrink:0; font-size:12px; letter-spacing:.03em; }
+.iv { color:var(--ink-2); line-height:1.75; }
 
-  .sidebar-logo .tagline {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.12em;
-    margin-top: 5px;
-    text-transform: uppercase;
-  }
+/* ── QUOTE / CALLOUT ── */
+.quote { border-left:3px solid var(--accent); padding:16px 22px; background:var(--accent-bg); border-radius:0 6px 6px 0; margin:28px 0; font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--ink); }
+.quote .src { font-size:11.5px; color:var(--ink-3); margin-top:8px; font-family:var(--sans); }
+.callout { background:var(--gold-bg); border:1px solid #DDD0B5; border-radius:6px; padding:18px 22px; margin:22px 0; font-size:13.5px; line-height:1.8; color:var(--ink-2); }
+.callout strong { color:var(--gold); font-weight:500; }
 
-  .nav-section {
-    padding: 0 16px;
-    margin-bottom: 4px;
-  }
+/* ── CARDS ── */
+.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; margin-top:16px; }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:7px; padding:20px; transition:box-shadow .2s,border-color .2s; }
+.card:hover { box-shadow:0 4px 18px rgba(0,0,0,.07); border-color:var(--border-dk); }
+.card-tag { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; font-weight:500; }
+.card h3 { font-size:14.5px; margin:0 0 8px; }
+.card p { font-size:12.5px; margin:0; color:var(--ink-3); line-height:1.7; }
 
-  .nav-section-label {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 12px 12px 6px;
-    font-weight: 400;
-  }
+/* ── VIDEO ── */
+.vlist { margin-top:16px; }
+.vitem { display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); }
+.vitem:last-child { border-bottom:none; }
+.vthumb { width:118px; height:67px; background:var(--accent-bg); border-radius:5px; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:20px; flex-shrink:0; border:1px solid var(--border); }
+.vep { font-size:10.5px; color:var(--ink-3); letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; }
+.vtitle { font-family:var(--serif); font-size:15px; color:var(--ink); margin-bottom:6px; line-height:1.4; }
+.vdesc { font-size:12.5px; color:var(--ink-3); line-height:1.6; }
 
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    font-weight: 300;
-    transition: background 0.15s, color 0.15s;
-    user-select: none;
-    line-height: 1.4;
-  }
+/* ── TABS ── */
+.tabs { display:flex; border-bottom:1px solid var(--border); margin-bottom:30px; }
+.tab { padding:9px 17px; font-size:13px; cursor:pointer; color:var(--ink-3); border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .15s,border-color .15s; user-select:none; }
+.tab:hover { color:var(--ink); }
+.tab.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:500; }
+.tc { display:none; }
+.tc.active { display:block; animation:fadeUp .22s ease; }
 
-  .nav-item:hover { background: var(--accent-light); color: var(--accent); }
+/* ── CONCEPT BLOCKS ── */
+.concept { background:var(--bg2); border:1px solid var(--border); border-radius:7px; padding:20px 24px; margin-bottom:12px; position:relative; overflow:hidden; }
+.concept::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent); }
+.concept h3 { margin:0 0 8px; font-size:15px; }
+.concept p { font-size:13.5px; margin:0; line-height:1.85; }
+.concept p + p { margin-top:9px; }
 
-  .nav-item.active {
-    background: var(--accent-light);
-    color: var(--accent);
-    font-weight: 500;
-  }
+/* ── STEPS ── */
+.steps { margin:16px 0; }
+.step { display:flex; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+.step:last-child { border-bottom:none; }
+.snum { width:28px; height:28px; border-radius:50%; background:var(--accent-bg); color:var(--accent); font-family:var(--serif); font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid #DFC4B5; }
+.sbody h3 { margin:0 0 5px; font-size:14px; }
+.sbody p { font-size:13px; margin:0; }
 
-  .nav-item .icon {
-    width: 16px;
-    height: 16px;
-    opacity: 0.6;
-    flex-shrink: 0;
-  }
-
-  .nav-sub-item {
-    padding: 6px 12px 6px 37px;
-    font-size: 12.5px;
-    border-radius: 5px;
-    cursor: pointer;
-    color: var(--text-muted);
-    transition: background 0.15s, color 0.15s;
-    user-select: none;
-  }
-
-  .nav-sub-item:hover { color: var(--accent); background: var(--accent-light); }
-  .nav-sub-item.active { color: var(--accent); font-weight: 500; }
-
-  .sidebar-footer {
-    margin-top: auto;
-    padding: 16px 28px 0;
-    border-top: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.8;
-  }
-
-  /* ── MAIN CONTENT ── */
-  #main {
-    margin-left: var(--sidebar-width);
-    flex: 1;
-    min-height: 100vh;
-  }
-
-  .page {
-    display: none;
-    padding: 56px 72px 80px;
-    max-width: 860px;
-    animation: fadeIn 0.25s ease;
-  }
-
-  .page.active { display: block; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── TYPOGRAPHY ── */
-  .page-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 400;
-    margin-bottom: 14px;
-  }
-
-  h1 {
-    font-family: var(--serif);
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 42px 0 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  h3 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin: 24px 0 8px;
-  }
-
-  .lead {
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.85;
-    margin-bottom: 32px;
-    font-family: var(--serif);
-    font-weight: 300;
-    border-left: 3px solid var(--border);
-    padding-left: 20px;
-  }
-
-  p {
-    font-size: 14.5px;
-    line-height: 1.9;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-  }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 36px 0;
-  }
-
-  /* ── CARDS ── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
-  }
-
-  .card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 22px 22px 18px;
-    cursor: pointer;
-    transition: box-shadow 0.2s, border-color 0.2s;
-  }
-
-  .card:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-    border-color: #C8C5BE;
-  }
-
-  .card-tag {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-
-  .card h3 {
-    margin: 0 0 8px;
-    font-size: 15px;
-    font-family: var(--serif);
-  }
-
-  .card p {
-    font-size: 13px;
-    margin: 0;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* ── VIDEO LIST ── */
-  .video-list { margin-top: 20px; }
-
-  .video-item {
-    display: flex;
-    gap: 18px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-
-  .video-item:hover { opacity: 0.75; }
-
-  .video-thumb {
-    width: 130px;
-    height: 75px;
-    background: var(--accent-light);
-    border-radius: 6px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent);
-    font-size: 22px;
-  }
-
-  .video-meta { flex: 1; }
-
-  .video-ep {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  }
-
-  .video-title {
-    font-size: 15px;
-    font-family: var(--serif);
-    color: var(--text-primary);
-    margin-bottom: 7px;
-    line-height: 1.4;
-  }
-
-  .video-desc {
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* ── PROFILE BLOCK ── */
-  .profile-block {
-    display: flex;
-    gap: 32px;
-    align-items: flex-start;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 32px;
-    margin-bottom: 36px;
-  }
-
-  .avatar-placeholder {
-    width: 88px;
-    height: 88px;
-    background: var(--accent-light);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    flex-shrink: 0;
-    border: 2px solid var(--border);
-  }
-
-  .profile-text h1 {
-    font-size: 26px;
-    margin-bottom: 6px;
-  }
-
-  .profile-text .role {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 14px;
-    letter-spacing: 0.05em;
-  }
-
-  .profile-text p {
-    font-size: 14px;
-    margin: 0;
-  }
-
-  /* ── TAG PILLS ── */
-  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-
-  .pill {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    background: var(--accent-light);
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .pill.warm {
-    background: #FDF6E3;
-    color: var(--accent-warm);
-  }
-
-  /* ── CONTENT BLOCKS for 新兴文明 ── */
-  .concept-block {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px 28px;
-    margin-bottom: 14px;
-  }
-
-  .concept-block h3 { margin: 0 0 10px; font-family: var(--serif); font-size: 16px; }
-  .concept-block p { font-size: 13.5px; margin: 0; }
-
-  .quote-block {
-    border-left: 3px solid var(--accent);
-    padding: 16px 24px;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    margin: 24px 0;
-    font-family: var(--serif);
-    font-size: 15px;
-    color: var(--text-primary);
-    line-height: 1.8;
-  }
-
-  /* ── SUB-NAV TABS ── */
-  .sub-tabs {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 32px;
-    margin-top: -8px;
-  }
-
-  .sub-tab {
-    padding: 10px 20px;
-    font-size: 13px;
-    cursor: pointer;
-    color: var(--text-muted);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.15s, border-color 0.15s;
-    user-select: none;
-  }
-
-  .sub-tab:hover { color: var(--text-primary); }
-
-  .sub-tab.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-    font-weight: 500;
-  }
-
-  .sub-content { display: none; }
-  .sub-content.active { display: block; animation: fadeIn 0.2s ease; }
-
+/* ── LINKS ── */
+.lrow { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+.lbtn { display:inline-flex; align-items:center; gap:6px; padding:7px 15px; border-radius:5px; font-size:12.5px; text-decoration:none; cursor:pointer; transition:opacity .15s; border:1px solid var(--border); color:var(--ink-2); background:var(--bg2); }
+.lbtn:hover { opacity:.72; }
+.lbtn.pri { background:var(--accent); color:white; border-color:var(--accent); }
 </style>
 </head>
 <body>
 
-<!-- ════════════════ SIDEBAR ════════════════ -->
+<!-- ══ SIDEBAR ══ -->
 <nav id="sidebar">
-  <div class="sidebar-logo">
-    <div class="name">武林山上</div>
-    <div class="tagline">心性 · 技术 · 文明</div>
+  <div class="sb-brand">
+    <div class="zh">法　愿</div>
+    <div class="en">Fa Yuan</div>
+    <div class="tl">心性文明推动者<br>武陵禅寺体系学人</div>
   </div>
 
-  <div class="nav-section">
-    <div class="nav-section-label">主页面</div>
-
-    <div class="nav-item active" onclick="showPage('youtube')">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
-      </svg>
+  <div class="sb-sec">
+    <div class="sb-lbl">主页面</div>
+    <div class="sb-item active" onclick="gPage('youtube',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
       YouTube 频道
     </div>
-
-    <div class="nav-item" onclick="showPage('wulin')">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      武林山上
+    <div class="sb-item" onclick="gPage('wulin',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      武陵山上
     </div>
-
-    <div class="nav-item" onclick="showPage('xinxing')">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="12" y1="8" x2="12" y2="12"/>
-        <line x1="12" y1="16" x2="12.01" y2="16"/>
-      </svg>
-      新兴文明
+    <div class="sb-item" onclick="gPage('xx',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      心性文明
     </div>
   </div>
 
-  <div class="nav-section" id="sub-nav-xinxing" style="display:none;">
-    <div class="nav-section-label">新兴文明</div>
-    <div class="nav-sub-item active" onclick="showSubTab('xinxing','lilun')">理念介绍</div>
-    <div class="nav-sub-item" onclick="showSubTab('xinxing','shixiu')">实修法</div>
-    <div class="nav-sub-item" onclick="showSubTab('xinxing','qushi')">未来趋势</div>
-    <div class="nav-sub-item" onclick="showSubTab('xinxing','sikao')">相关思考</div>
+  <div class="sb-sec" id="sub-xx">
+    <div class="sb-lbl">心性文明</div>
+    <div class="sb-sub active"  onclick="gTab('xx','lilun',this)">理念介绍</div>
+    <div class="sb-sub"         onclick="gTab('xx','shixiu',this)">实修法（修道班）</div>
+    <div class="sb-sub"         onclick="gTab('xx','qushi',this)">未来趋势</div>
+    <div class="sb-sub"         onclick="gTab('xx','sikao',this)">思考与观察</div>
   </div>
 
-  <div class="sidebar-footer">
-    <div>© 2025 武林山上</div>
-    <div style="margin-top:4px;">内容持续更新中</div>
+  <div class="sb-foot">
+    <div>© 2025 法愿</div>
+    <div><a href="https://mp.weixin.qq.com" target="_blank">公众号「惟惟道来」</a></div>
+    <div><a href="#" target="_blank">小程序「小愿禅修」</a></div>
   </div>
 </nav>
 
-<!-- ════════════════ MAIN ════════════════ -->
+<!-- ══ MAIN ══ -->
 <main id="main">
 
-  <!-- ── YouTube 频道 ── -->
+  <!-- YouTube -->
   <div class="page active" id="page-youtube">
-    <div class="page-eyebrow">个人主页 · YouTube 频道</div>
-
-    <div class="profile-block">
-      <div class="avatar-placeholder">🧘</div>
-      <div class="profile-text">
-        <h1>你的名字</h1>
-        <div class="role">修行者 · 探索者 · 内容创作者</div>
-        <p>从道场出发，以理性为工具，以心性为根基，探索技术与文明交汇处的可能性。</p>
-        <div class="pill-row">
-          <span class="pill">心性修炼</span>
-          <span class="pill">超级个体</span>
-          <span class="pill warm">新兴文明</span>
-          <span class="pill warm">前沿技术</span>
+    <div class="eyebrow">个人主页</div>
+    <div class="prof">
+      <div class="avatar">🧘</div>
+      <div class="prof-info">
+        <div class="name">法　愿</div>
+        <div class="role">心性文明推动者 · 武陵禅寺体系学人 · 内容创作者</div>
+        <p style="font-size:13.5px;margin:0;line-height:1.85;">从武陵山上走出来，以理性为工具，以心性修炼为根基，探索技术与文明交汇处的可能性。关注 AI 发展、未来趋势与人类心性的演化，感召有开创精神的同行者。</p>
+        <div class="tags">
+          <span class="tag r">心性文明</span>
+          <span class="tag r">禅法修炼</span>
+          <span class="tag g">超级个体</span>
+          <span class="tag g">前沿技术</span>
+          <span class="tag k">AI 与未来</span>
         </div>
       </div>
     </div>
 
-    <h2>频道介绍</h2>
-    <p>
-      这里是频道的简要介绍，说明你做视频的出发点、面向的人群，以及观众能从中得到什么。
-      建议2–4句话，简洁有力。
-    </p>
+    <div class="info-row"><span class="il">公众号</span><span class="iv">「惟惟道来」· 每日更新，心性修炼与时代思考</span></div>
+    <div class="info-row"><span class="il">小程序</span><span class="iv">「小愿禅修」· 全国禅修活动 · 法门介绍 · 公开资料</span></div>
+    <div class="info-row"><span class="il">修道班</span><span class="iv">每月公益线上禅修 · 系统、科学、去宗教化的心性修炼课程</span></div>
+
+    <h2>YouTube 频道</h2>
+    <p>频道正在筹备中，内容以心性文明为主线，结合时代前沿议题，面向有理性、有开创精神、关注未来的人。视频会附带可交互的配套网页，呈现更清晰的逻辑结构。</p>
+    <div class="callout">
+      <strong>频道定位：</strong>不是宗教宣传，不是鸡汤。是以理性为导向，从禅法与心性修炼出发，思考人在技术时代如何保持清醒、完成自我建构，并在世间有所作为的严肃探讨。
+    </div>
 
     <h2>视频列表</h2>
-    <div class="video-list">
-      <div class="video-item">
-        <div class="video-thumb">▶</div>
-        <div class="video-meta">
-          <div class="video-ep">第 01 期</div>
-          <div class="video-title">视频标题将显示在这里</div>
-          <div class="video-desc">视频简介，一两句话说明这期视频讲了什么、有什么价值。</div>
-        </div>
-      </div>
-      <div class="video-item">
-        <div class="video-thumb">▶</div>
-        <div class="video-meta">
-          <div class="video-ep">第 02 期</div>
-          <div class="video-title">视频标题将显示在这里</div>
-          <div class="video-desc">视频简介，一两句话说明这期视频讲了什么、有什么价值。</div>
-        </div>
-      </div>
-      <div class="video-item" style="border-bottom:none;">
-        <div class="video-thumb" style="background:#F5F3EE; color:var(--text-muted); font-size:14px; text-align:center; padding:8px;">即将<br>上线</div>
-        <div class="video-meta">
-          <div class="video-ep">第 03 期</div>
-          <div class="video-title" style="color:var(--text-muted);">准备中……</div>
-          <div class="video-desc">敬请期待。</div>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vthumb">▶</div>
+        <div>
+          <div class="vep">第 01 期 · 筹备中</div>
+          <div class="vtitle">敬请期待——第一期视频准备中</div>
+          <div class="vdesc">主题确定后将在此更新。订阅频道可第一时间收到通知。</div>
         </div>
       </div>
     </div>
+
+    <div class="lrow" style="margin-top:28px;">
+      <a class="lbtn pri" href="https://youtube.com" target="_blank">▶ 前往 YouTube 频道</a>
+      <a class="lbtn" href="https://mp.weixin.qq.com" target="_blank">公众号「惟惟道来」</a>
+    </div>
   </div>
 
-  <!-- ── 武林山上 ── -->
+  <!-- 武陵山上 -->
   <div class="page" id="page-wulin">
-    <div class="page-eyebrow">武林山上</div>
-    <h1>道场与项目</h1>
-    <p class="lead">
-      武林山上是我们修行与学习的根基地。这里有道场的基本介绍，以及正在推进中的各项目。
-    </p>
+    <div class="eyebrow">武陵山上</div>
+    <h1>武陵禅寺</h1>
+    <p class="lead">硬核实修道场。禅门高峻，禅风凌厉。为自我要求高、理想高、有志于系统心性修炼的人而建。</p>
+
+    <div class="quote">
+      「教则心慈手狠，学则大干一场。」
+      <div class="src">— 武陵禅寺道场风格</div>
+    </div>
 
     <h2>道场介绍</h2>
-    <p>道场的背景、理念、地理与历史，用几段话介绍。可以包括修行传承、核心方法论、与其他传统的关系等。这里是占位文字，等你填入真实内容。</p>
+    <p>武陵禅寺隶属武陵山体系，以汉传佛教大乘禅法为根基，由惟海法师主持。道场明确区别于以放松、疗愈或文化体验为主的休闲式禅修，是一处以"纯修行"为志向的理想主义实修平台。</p>
+    <p>核心要求是学员保持精神提振、全神贯注，要"功夫上身"，获得真实的体认与体悟。培养的不是出世之人，而是心理健康、人格健全——能在世间担负个人、家庭、社会责任的正常人。</p>
+    <div class="callout"><strong>大乘风格：</strong>具有强烈的担当精神与菩萨精神。修行的目的是让人在世间更有力量、更清醒，而非回避现实。</div>
 
-    <div class="quote-block">
-      「心性者，万法之本；技术者，时代之器。以本驭器，方能行远。」
-      <div style="font-size:12px; color:var(--text-muted); margin-top:10px; font-family:var(--sans);">— 可替换为你认同的核心理念</div>
+    <h2>核心项目</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-tag">线上 · 公益</div>
+        <h3>修道班</h3>
+        <p>每月公益线上禅修 + 三个月系统课程。科学、系统、去宗教化的心性修炼路径。</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">公众号 · 日更</div>
+        <h3>惟惟道来</h3>
+        <p>惟海法师开示及相关文章，每日更新。法愿负责整理推送，坚持日更。</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">小程序</div>
+        <h3>小愿禅修</h3>
+        <p>全国禅修活动信息、法门介绍、祖师大德事迹等公开资料。</p>
+      </div>
     </div>
 
-    <h2>项目介绍</h2>
-    <p>以下是目前正在推进的几个项目方向，点击卡片查看详情。</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-tag">项目 01</div>
-        <h3>项目名称</h3>
-        <p>一两句话说明这个项目是什么、目标是什么。</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">项目 02</div>
-        <h3>项目名称</h3>
-        <p>一两句话说明这个项目是什么、目标是什么。</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">项目 03</div>
-        <h3>项目名称</h3>
-        <p>一两句话说明这个项目是什么、目标是什么。</p>
-      </div>
+    <h2>联系与参与</h2>
+    <p>如果你对修道班、线上禅修或相关学习有兴趣，可以通过以下方式了解：</p>
+    <div class="lrow">
+      <span class="lbtn">微信公众号：惟惟道来</span>
+      <span class="lbtn">小程序：小愿禅修</span>
     </div>
   </div>
 
-  <!-- ── 新兴文明 ── -->
-  <div class="page" id="page-xinxing">
-    <div class="page-eyebrow">新兴文明</div>
-    <h1>新兴文明</h1>
+  <!-- 心性文明 -->
+  <div class="page" id="page-xx">
+    <div class="eyebrow">心性文明</div>
+    <h1>心性文明</h1>
+    <p class="lead">人类文明的内在核心与终极归宿。一切外在文明的发展，最终必须服务于人内在心性的觉醒与提升，才有根本意义。</p>
 
-    <div class="sub-tabs">
-      <div class="sub-tab active" onclick="showSubTab('xinxing','lilun')">理念介绍</div>
-      <div class="sub-tab" onclick="showSubTab('xinxing','shixiu')">实修法</div>
-      <div class="sub-tab" onclick="showSubTab('xinxing','qushi')">未来趋势</div>
-      <div class="sub-tab" onclick="showSubTab('xinxing','sikao')">相关思考</div>
+    <div class="tabs">
+      <div class="tab active" onclick="gTab('xx','lilun',this)">理念介绍</div>
+      <div class="tab"        onclick="gTab('xx','shixiu',this)">实修法</div>
+      <div class="tab"        onclick="gTab('xx','qushi',this)">未来趋势</div>
+      <div class="tab"        onclick="gTab('xx','sikao',this)">思考与观察</div>
     </div>
 
     <!-- 理念介绍 -->
-    <div class="sub-content active" id="xinxing-lilun">
-      <p class="lead">新兴文明的核心理念是什么？从哪里来，往哪里去。这里放你的核心叙事框架。</p>
-
-      <div class="concept-block">
-        <h3>心性修炼</h3>
-        <p>对心性修炼的理解与定义。它与传统修行的关系，与现代认知科学的关联，以及为什么在当下特别重要。</p>
+    <div class="tc active" id="xx-lilun">
+      <div class="quote">「一切文明的本质是心性的境界。最终人类的文明应该是人自身。」<div class="src">— 惟海法师</div></div>
+      <div class="concept">
+        <h3>根本定义</h3>
+        <p>心性文明是所有人类文明（物质、科技、制度等）发展的内在核心与最终归宿。文明的终极目标不是外在的征服与积累，而是人自身的完善与觉醒。它是"人类普遍性的基础文明"，超越种族、地域和特定宗教的界限。</p>
       </div>
-      <div class="concept-block">
-        <h3>超级个体</h3>
-        <p>什么是超级个体？技术杠杆如何放大个人能量？修行基础如何保证方向不偏？</p>
+      <div class="concept">
+        <h3>三个维度：知识 · 技术 · 境界</h3>
+        <p><strong>知识体系：</strong>关于人性、心理、精神生命的具体化、科学化、系统化知识。反对笼统混沌的描述，主张对人的结构与功能进行明细化研究。</p>
+        <p><strong>技术体系：</strong>可操作、可训练、可验证的心性修炼方法——核心代表即禅法。使心性文明从抽象理念落到实地，成为"心·身·慧命实践系统"。</p>
+        <p><strong>价值与境界：</strong>以觉悟性、自觉性、德性、精神性为最高价值导向，追求"慧命"（精神生命）的激发、成长与养育。</p>
       </div>
-      <div class="concept-block">
-        <h3>感召与共同体</h3>
-        <p>不是招募，是感召。面向有理性、关注前沿、有开创精神的人，一起探索。</p>
+      <div class="concept">
+        <h3>禅法：技术化落地</h3>
+        <p>大乘禅法是心性文明的技术化落地，将抽象理念落实到具体可操作的修炼技术上。通过禅修实践，把心性文明落实到具体的身心、行为、人生和社会实践中。</p>
+      </div>
+      <div class="concept">
+        <h3>现实目标</h3>
+        <p>对个体：疗愈心理失调，开发觉性与智慧，成就人格健全、生命充分发展的"清明的人"。修炼进步的证明是：心身更好、家庭更好、工作更好、事业更好。</p>
+        <p>对人类：引领人类精神进化方向，是中华文明对世界作出的主要贡献之一。</p>
       </div>
     </div>
 
     <!-- 实修法 -->
-    <div class="sub-content" id="xinxing-shixiu">
-      <p class="lead">具体的修炼方法与路径，可以是分阶段的体系，也可以是若干核心实践。</p>
-      <p>这里填入实修法的内容，比如：基础功法、进阶修炼、日常功课、身心调节方法等。</p>
+    <div class="tc" id="xx-shixiu">
+      <p class="lead">修道班——系统、科学、去宗教化的心性修炼课程。每月公益线上开放，三个月为一期。</p>
+      <div class="callout"><strong>核心理念：</strong>不是宗教仪式，不是玄学讲座。是以科学态度面对人的身心结构，用禅法作为技术工具，系统训练注意力、觉察力与心性境界。</div>
+      <h2>课程结构</h2>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="sbody"><h3>每月公益线上禅修</h3><p>定期开放的线上入门课，了解心性修炼的基本框架与禅法方法论。适合初学者或想系统了解的人。</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="sbody"><h3>三个月修道班（系统课）</h3><p>深度系统课程，包括知识体系、禅修技术、日常功课与定期辅导。要求全情投入，功夫上身。</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="sbody"><h3>道场进修</h3><p>有意愿者可前往武陵禅寺进行线下深度修炼。禅风凌厉，不适合以休闲为目的者。</p></div></div>
+      </div>
+      <h2>报名与了解</h2>
+      <p>通过公众号「惟惟道来」或小程序「小愿禅修」了解最新活动安排与报名方式。</p>
     </div>
 
     <!-- 未来趋势 -->
-    <div class="sub-content" id="xinxing-qushi">
-      <p class="lead">对时代趋势的观察与判断，为什么现在是一个关键的历史节点。</p>
-      <p>可以涵盖：AI与人类关系、社会结构变迁、意识演化、东西方文明的交汇等主题。</p>
+    <div class="tc" id="xx-qushi">
+      <p class="lead">为什么现在是一个关键节点？技术加速、社会变革、意识演化——三条线索交汇于此。</p>
+      <div class="concept"><h3>AI 与人类的关系</h3><p>AI 正在重塑个人能力的边界，也在重新定义"人的价值"。技术放大的是人的已有结构——包括智识，也包括心性。没有心性根基的技术放大，是危险的。</p></div>
+      <div class="concept"><h3>超级个体的崛起</h3><p>技术杠杆使个人可以完成过去需要团队才能完成的工作。心性修炼决定了这个"超级个体"的质量——清醒还是混乱，有担当还是无方向。</p></div>
+      <div class="concept"><h3>东西方文明的交汇</h3><p>心性文明是中华文明中以人文、心学见长的精髓所在。在西方科技文明面临内在危机的时代，东方的心性传统具有独特的补充价值。这不是文化优越论，而是文明互补的现实判断。</p></div>
+      <div class="callout">这些判断不是预言，是观察与思考的出发点。具体内容将在 YouTube 频道的视频中逐步展开，并附有可交互的结构化网页。</div>
     </div>
 
-    <!-- 相关思考 -->
-    <div class="sub-content" id="xinxing-sikao">
-      <p class="lead">零散但有价值的思考片段，可以是读书笔记、观察随想、与人交流后的感悟。</p>
-      <p>这里可以做成类似"思考日志"的格式，按时间或主题排列。</p>
+    <!-- 思考与观察 -->
+    <div class="tc" id="xx-sikao">
+      <p class="lead">零散但有价值的思考片段——读书、观察、实修与交流后的积累。持续更新。</p>
+      <div class="concept"><h3>关于修炼与学习的关系</h3><p>学佛而非信佛。"学"意味着以理性态度考察、验证、吸收；"信"意味着前置接受。心性文明的路径是前者——用科学的态度面对人自身的心理与精神结构。</p></div>
+      <div class="concept"><h3>关于工具与方向</h3><p>飞书、AI、内容创作……这些都是工具。工具的价值由使用者的心性境界决定。工具越强大，对使用者的清醒程度要求越高。这是我持续修炼同时持续学习技术的原因。</p></div>
+      <div class="concept"><h3>关于感召与招募的区别</h3><p>招募是筛选符合条件的人；感召是让真正有共鸣的人自己走过来。不需要说服任何人，只需要把所理解的东西清晰地呈现出来。</p></div>
+      <p style="margin-top:22px;font-size:13px;color:var(--ink-3);">更多思考持续整理中，也发布在公众号「惟惟道来」。</p>
     </div>
   </div>
 
 </main>
 
 <script>
-  function showPage(id) {
-    // Hide all pages
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    // Show target
-    document.getElementById('page-' + id).classList.add('active');
+const tabMap = { lilun:0, shixiu:1, qushi:2, sikao:3 };
 
-    // Update nav items
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+function gPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sub-xx').style.display = (id === 'xx') ? 'block' : 'none';
+}
 
-    // Show/hide sub-nav
-    document.getElementById('sub-nav-xinxing').style.display =
-      (id === 'xinxing') ? 'block' : 'none';
-  }
-
-  function showSubTab(page, tab) {
-    // Update sub-tabs in page
-    const pageEl = document.getElementById('page-' + page);
-    pageEl.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
-    pageEl.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-
-    // Activate clicked tab
-    const tabs = pageEl.querySelectorAll('.sub-tab');
-    const tabMap = { lilun: 0, shixiu: 1, qushi: 2, sikao: 3 };
-    tabs[tabMap[tab]].classList.add('active');
-    document.getElementById(page + '-' + tab).classList.add('active');
-
-    // Update sidebar sub-items
-    document.querySelectorAll('#sub-nav-xinxing .nav-sub-item').forEach(i => i.classList.remove('active'));
-    const subItems = document.querySelectorAll('#sub-nav-xinxing .nav-sub-item');
-    subItems[tabMap[tab]].classList.add('active');
-  }
+function gTab(page, tab, el) {
+  const pg = document.getElementById('page-' + page);
+  pg.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  pg.querySelectorAll('.tc').forEach(c => c.classList.remove('active'));
+  const tabs = pg.querySelectorAll('.tab');
+  if (tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
+  const ct = document.getElementById(page + '-' + tab);
+  if (ct) ct.classList.add('active');
+  const subs = document.querySelectorAll('#sub-xx .sb-sub');
+  subs.forEach(s => s.classList.remove('active'));
+  if (subs[tabMap[tab]]) subs[tabMap[tab]].classList.add('active');
+}
 </script>
 </body>
 </html>
